@@ -1,0 +1,15 @@
+var data = {};
+		var csrf_token = $('#csrf_getting_form [name="csrfmiddlewaretoken"]').val();
+		data["csrfmiddlewaretoken"] = csrf_token;
+		var url = '/get_likes'+message_id+'/';
+		$.ajax({
+			url: url,
+			type: 'POST',
+			data: data,
+			cache: true,
+			success: function (data) {
+				console.log("OK");
+				$('#likes_list').html();
+				$.each(data, function (key, value)
+					$('#likes_list').append('<p>'+value.username+'</p>')
+			)};

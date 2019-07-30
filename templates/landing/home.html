@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+	<div class="section-top">
+	<div id="carousel" class="carousel slide carousel-fade" data-ride="carousel">
+	<!-- Indicators -->
+	<ol class="carousel-indicators">
+		<li data-target="#carousel" data-slide-to="0" class="active"></li>
+		<li data-target="#carousel" data-slide-to="1"></li>
+		<li data-target="#carousel" data-slide-to="2"></li>
+	</ol>
+	<div class="carousel-inner">
+		{% for main_image in main_carousel_image %}
+		<div class="carousel-item active">
+			<img class="img-fluid" src="{{main_image.image.url}}" alt="{{main_image.name}}">
+				<div class="carousel-caption d-none d-md-block">
+					<div class="carousel-title">
+						<h2>{{main_image.name}}</h2>
+						<p>{{main_image.description}}</p>
+					</div>
+				</div>
+		</div>
+		{% endfor %}
+		{% for image in carousel_images %}
+		{% include 'landing/carousel.html' %}
+		{% endfor %}
+	</div>
+	<!-- Control elements -->
+	<a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		<span class="sr-only">Previous</span>
+	</a>
+	<a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+		<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		<span class="sr-only">Next</span>
+	</a>
+</div>
+<script>
+            $('.carousel').carousel({
+            interval: 7000,
+            keyboard: false,
+            pause: false,
+            ride: 'carousel',
+            wrap: true
+})
+    </script>
+		
+		
+		
+		
+	</div>
+	<div class="section section1">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-12 green-bg">
+			<h2>New Products</h2>
+			</div>
+		</div>
+	</div>
+		<div class="container">
+			<div class="row">
+			<div class="col-lg-12 text-center">
+			
+			</div>
+				
+				{% for product_image in last_eight_images %}
+				
+				{% include 'landing/product_item.html' %}
+				{% endfor %}
+				
+			</div>
+		</div>
+	</div>
+	
+	<div class="section section-delivery">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="slider-nav">
+						{% for slider in slick_slider %}
+						{% include 'landing/slick.html' %}
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="section section2 food-container mt-3">
+		<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-12 green-bg">
+			<h2>Healthy Food</h2>
+			</div>
+		</div>
+	</div>
+	
+		<div class="container">
+			<div class="row">
+			<!-- <div class="col-lg-12 text-center"> -->
+			<!-- <h1><span class="home_title">Healthy Food</span></h1> -->
+			<!-- </div> -->
+				{% for product_image in four_products_images_food %}
+				{% include 'landing/product_item.html' %}
+				{% endfor %}
+				
+			</div>
+		</div>
+	</div>
+	<div class="section section3 drinks-container">
+		<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-12 green-bg">
+			<h2>Healthy Drinks</h2>
+			</div>
+		</div>
+	</div>
+	
+		<div class="container">
+			<div class="row">
+			<!-- <div class="col-lg-12 text-center"> -->
+			<!-- <h1><span class="home_title">Healthy Drinks</span></h1> -->
+			<!-- </div> -->
+				{% for product_image in four_products_images_drinks %}
+				{% include 'landing/product_item.html' %}
+				{% endfor %}
+				
+			</div>
+		</div>
+	</div>
+{% endblock %}

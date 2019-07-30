@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %} 
+{{ product.name }} - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="product-block">
+	<div class="container-fluid">
+		<div class="row product-row">
+			<div class="col-lg-6 max-half-width center">
+				<div class="product-page-img-container center">
+					{% for image_item in product.productimage_set.all %}
+					{% if image_item.is_main %}
+					<img src="{{ image_item.image.url }}" class="img-responsive">
+					{% endif %}
+					{% endfor %}
+				</div>
+			</div>
+			<div class="col-lg-6 bg center">
+				<h1 class="product-page-title">
+					{{ product.name }}
+				</h1>
+				<div class="">
+					<p>
+					Price: ${{ product.final_price }}
+					{% if product.discount %}
+					<del>${{ product.price }}</del> {% endif %}
+					</p>
+				</div>
+				
+				<div class="center">
+					<form id="form_buying_product" method="post" class="form_buying_product form-inline" action="{% url 'cart_adding' %}">
+					{% csrf_token %}
+						<div class="form-inline">
+							<!-- <input type="number" class="form-control" placeholder="0" id="number"> -->
+							<button type="button" class="but counterBut dec bot_pm">-</button>
+							  <input type="text" class="field fieldCount form-control form-group center" id="{{ product.id }}" value="1" data-min="1" data-max="1000">
+							<button type="button" class="but counterBut inc bot_pm">+</button>
+						</div>
+						
+						<div class="form-group">
+							<button type="submit" id="submit-btn" class="submit-button state-0 order"
+							data-product_id="{{ product.id }}"
+							data-name="{{ product.name }}"
+							
+							{% for image_item in product.productimage_set.all %}
+							{% if image_item.is_main %}
+							data-image_url="{{ image_item.image.url }}"
+							{% endif %}
+							{% endfor %}
+							>
+						<span class="pre-state-msg">ADD TO CART</span>
+						<span class="done-state-msg hide">DONE!</span>
+					</button>
+						</div>
+					</form>
+				</div>
+				
+				<div class="product-tabs-panel">
+					<ul class="nav nav-tabs">
+						<li class="nav-item">
+						  <a class="nav-link active" data-toggle="tab" href="#description">Description</a>
+						</li>
+						<li class="nav-item">
+						  <a class="nav-link" data-toggle="tab" href="#shipping">Shipping</a>
+						</li>
+						
+					</ul>
+
+					  <!-- Tab panes -->
+					<div class="tab-content">
+						<div id="description" class="container tab-pane active"><br>
+							
+							<p><div class="product-description">
+							{{ product.description }}
+							</div></p>
+						</div>
+						<div id="shipping" class="container tab-pane fade"><br>
+							
+							<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+						</div>
+						
+					</div>
+				</div>
+
+			</div>
+				
+			
+		</div>
+	</div>
+</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				
+				<h2>Related Products</h2>
+				
+			</div>
+		</div>
+		<div class="row">
+		
+				
+
+			{% for product_image in four_last_products %}
+			{% include 'landing/product_item.html' %}
+			{% endfor %}
+
+				
+		</div>
+	</div>
+
+	<script src="{% static 'js/num.js' %}"></script>
+{% endblock %}
