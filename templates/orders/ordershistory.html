@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+Orders - {{ block.super }}
+{% endblock %}
+{% block content %}
+
+	<div class="container">
+		<div class="row">
+
+			{% if user.is_authenticated %}
+				<!-- <div class="col-xl-8 offset-xl-2"> -->
+				<div class="col-xl-12">
+					{% if  user_order_list  %}
+					<h1 class="text-center bg mt-3">Your Orders:</h1>
+					<div class="table-container">
+					
+					{% for item in user_order_list %}
+					<table class="table-all-orders text-center">
+					
+						<tr>
+							<th>Index</th>
+							<th>Status</th>
+							<th>Total Price</th>
+							<th>Image</th>
+							<th>Product Name</th>
+							<th>Quantity</th>
+							<th>Price per Item</th>
+						</tr>
+						
+					
+					
+						<tr>
+							<td>
+							{{item.id}}
+							</td>
+							<td>
+							{{ item.status.name }}
+							</td>
+							<td>
+							${{item.total_price}}
+							</td>
+						
+						
+					{% for stuff in item.relatedorder.all%}
+							
+							<td>
+							<img src="{{ stuff.image_url }}" width='100px'>
+							</td>
+							<td>
+							{{stuff.product.name}}
+							</td>
+							<td>
+							{{stuff.nmb}}
+							</td>
+							<td>
+							${{stuff.price_per_item}}
+							</td>
+							
+							</tr>
+							<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							{% endfor %}
+
+						</tr>
+					</tbody>
+					</table>
+					{% endfor %}
+					{% else %}
+					<h1 class="text-center bg mt-3">You have no orders.</h1>
+					{% endif %}
+					
+					</div>
+					
+
+				</div>
+				{% else %}
+				<h1 class="text-center bg mt-3">There is no items.</h1>
+				{% endif %}
+
+		
+		</div>
+	</div>
+
+{% endblock %}

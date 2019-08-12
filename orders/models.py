@@ -43,7 +43,7 @@ class Order(models.Model):
 class ProductInOrder(models.Model):
 	#image_url = models.SlugField(blank=True, null=True, default=None)
 	image_url = models.ImageField(blank=True, null=True, default=None)
-	order = models.ForeignKey(Order,  on_delete=models.CASCADE, blank=True, null=True, default=None)
+	order = models.ForeignKey(Order,  on_delete=models.CASCADE, blank=True, null=True, default=None, related_name='relatedorder')
 	product = models.ForeignKey(Product,  on_delete=models.PROTECT, blank=True, null=True, default=None)
 
 	customer_email = models.EmailField(blank=True, null=True, default=None)

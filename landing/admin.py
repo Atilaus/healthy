@@ -4,7 +4,7 @@ from .models import *
 # Register your models here.
 class SubscriberAdmin(admin.ModelAdmin):
 	list_display = [field.name for field in Subscriber._meta.fields]
-	list_display_links = ['name', 'email']
+	list_display_links = ['email']
 	search_fields = ['name', 'email']
 	#inlines = [FieldMappingInline]
 	#fields = []

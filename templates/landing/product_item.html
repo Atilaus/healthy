@@ -10,17 +10,21 @@
 			{{ product_image.product.discount }}%
 		</div>
 		{% endif %}
+	<div class="description-container">
 	<h5>
-	{{ product_image.product.name }}
+	{{ product_image.product.name|truncatechars_html:17 }}
 	</h5>
 	
-	<p>
+	<p><span class="fw100">
 	{{ product_image.product.description|truncatechars_html:50 }}
+	</span>
 	</p>
+	</div>
+	<div class="price-container">
 	{% if product_image.product.discount %}
-	<h5><del>${{ product_image.product.price }}</del> {% endif %}
-	${{ product_image.product.final_price }}</h5>
-	
+	<del>${{ product_image.product.price }}</del> {% endif %}
+	${{ product_image.product.final_price }}
+	</div>
 	<form class="form_buying_product" action="{% url 'cart_adding' %}">
 	{% csrf_token %}
 	<div class="add-to-cart-btn">

@@ -1,10 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from .models import *
 from products.models import Product
 from .forms import CheckoutContactForm
 from django.contrib.auth.models import User
 from landing.models import BackgroundImage
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -50,33 +52,52 @@ def checkout(request):
 	session_key = request.session.session_key
 	products_in_cart = ProductInCart.objects.filter(session_key=session_key, is_active=True).exclude(order__isnull=False)
 	form = CheckoutContactForm(request.POST or None)
+	user = request.user
+	
 	if request.POST:
 		
 		if form.is_valid():
 			data = request.POST
-			name = data["name"]
-			phone = data["phone"]
 			email = data["email"]
+			password = data["password"]
 			
-			user, created = User.objects.get_or_create(username=email, defaults={"first_name": name})
-			print(data)
-			order=Order.objects.create(user=user, customer_name=name, customer_phone=phone, status_id=1)
+			user, created = User.objects.get_or_create(username=email, password=password, defaults={"email": email})
 			
-			for name, value in data.items():
-				if name.startswith("product_in_cart_"):
-					product_in_cart_id = name.split("product_in_cart_")[1]
-					
-					product_in_cart = ProductInCart.objects.get(id=product_in_cart_id)
-					print(product_in_cart)
-					#product_in_cart.image_url = image_url
-					print(product_in_cart.image_url)
-					product_in_cart.nmb = value
-					product_in_cart.order = order
-					product_in_cart.save(force_update=True)
-
-					
-					ProductInOrder.objects.create(product=product_in_cart.product, nmb= product_in_cart.nmb, image_url = product_in_cart.image_url, price_per_item=product_in_cart.price_per_item, total_price=product_in_cart.total_price, order=order)
-					
-	bg_image = BackgroundImage.objects.filter(is_active=True)
+		elif user.is_authenticated:
+			data = request.POST
+			email = user
+			
+		order=Order.objects.create(user=user, status_id=1)
+		
+		for name, value in data.items():
+			if name.startswith("product_in_cart_"):
+				product_in_cart_id = name.split("product_in_cart_")[1]
 				
+				product_in_cart = ProductInCart.objects.get(id=product_in_cart_id)
+				print(product_in_cart)
+				#product_in_cart.image_url = image_url
+				print(product_in_cart.image_url)
+				product_in_cart.nmb = value
+				product_in_cart.order = order
+				product_in_cart.save(force_update=True)
+
+				
+				ProductInOrder.objects.create(product=product_in_cart.product, nmb= product_in_cart.nmb, image_url = product_in_cart.image_url, customer_email=email, customer_name=email,  price_per_item=product_in_cart.price_per_item, total_price=product_in_cart.total_price, order=order)
+			
+			# login(request, user)
+			# return redirect('checkout')
+			success(request, user)
+	
 	return render(request, 'orders/checkout.html', locals())
+	
+def success(request, user):
+	login(request, user)
+	return render(request, 'orders/success.html', locals())
+
+@login_required	
+def userorders(request):
+	user=request.user
+	if user.is_authenticated:
+		user_order_list = Order.objects.filter(user=request.user)
+		
+	return render(request, 'orders/ordershistory.html', locals())

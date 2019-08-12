@@ -1,8 +1,68 @@
+.tab{
+	margin-right: 1%;
+}
+.tab-8{
+	margin-right: 8%;
+}
+.errorlist,
+.errorlist.nonfield{
+	display:none;
+}
+h1, h2, h3, h4{
+	font-weight: 100;
+}
+.auth-text u{
+	color: #ff5500;
+}
+.auth-text{
+	color: #7f7f7f;
+}
+.auth-button{
+	color: #81c003;
+}
+.auth-container a{
+	color: #ff5500;
+}
+.auth-container{
+	padding-right: 10%;
+	text-align: right;
+	width: 100%;
+	font-weight: 100;
+	font-family: 'Nunito', sans-serif;
+	font-size: 0.8em;
+}
+.span-line::after{
+	content: "  |  ";
+}
+.navbar-light .navbar-nav .nav-link {
+	color: #8a815d;
+	font-size: 1.2em;
+}
+a.decor:hover {
+	text-decoration: underline;
+}
+.r{
+	float: right;
+	margin-right: 0%;
+}
+.fw700{
+	font-weight: 700;
+	font-size: 3em;
+}
+.fw100,
+.col-md-3,
+.tab-content,
+.nav-item{
+	font-weight: 100;
+}
 .mt-7{
 	margin-top: 10%;
 }
 #logo{
 	width: 110px;
+}
+.fixed-top{
+	top: 4%;
 }
 .home_title{
 	color: #81c003;
@@ -18,11 +78,31 @@
 .table{
 	background-color: white;
 	margin-bottom: 0;
+	width: 100%;
 }
-
+.table-all-orders{
+	background-color: white;
+	margin-bottom: 3%;
+	width: 100%;
+}
+.table-container{
+	background-color: white;
+}
+.table-all-orders td,
+.table-all-orders th{
+	padding:0.75rem;
+	vertical-align: top;
+}
+.table-all-orders th{
+	border-top: 1px solid #dee2e6;
+	background-color: #f3f3f3
+}
+.table-all-orders th{
+	border-bottom: 1px solid #dee2e6;
+}
 #checkout_lnk{
 	font-family: 'Nunito', sans-serif;
-	font-size: 1.8em;
+	font-size: 1.3em;
 	overflow:hidden;
 	Z-index: 11;
 	color: #ff5500;
@@ -46,9 +126,7 @@ a.green-text:hover,
 html, body{
 	height: 100%;
 	max-height: 100%;
-	/*background-color: white;*/
 	font-family: 'Nunito', sans-serif;
-	/* background-image: url(18.png); */
 	background-repeat: repeat;
 }
 
@@ -108,7 +186,7 @@ a.delete-item:hover{
 	margin-top:3%;
 }
 .product-block{
-	margin-top: 8%;
+	margin-top: 4%;
 	margin-bottom: 10%;
 }
 .wrapper{
@@ -166,7 +244,6 @@ a.delete-item:hover{
 .section-top
 {
 	padding-bottom: 20px;
-	margin-top: 3%;
 }
 .add-to-cart-btn
 {
@@ -176,10 +253,25 @@ a.delete-item:hover{
 	right: 0;
 	left: 0;
 }
+.description-container{
+	position: absolute;
+	top: 182px;
+	width: 100%;
+}
+.price-container{
+	position: absolute;
+	top: 270px;
+	width: 100%;
+	font-size: 1.6em;
+}
 .img-show .img-responsive
 {
 	max-width: 190px; /* should be same as col-lg width */
 	max-height: 170px;
+	
+}
+.img-show p{
+	font-weight: 700;
 }
 .img-show a img {
  -moz-transition: all 1s ease-out;
@@ -216,8 +308,8 @@ a.delete-item:hover{
 	font-size: 1.3rem;
 }
 .title_category_price{
-	font-weight: 700;
-	font-size: 1.3rem;
+	font-weight: 100;
+	font-size: 1.8em;
 	position: absolute;
 	left: 80%;
 }
@@ -245,7 +337,7 @@ a.delete-item:hover{
 	padding-bottom: 30px;
 	clear: both;
 	color: white;
-	background-color: #4e4e4e;
+	 background-color: #634d3d; /*or #394c36 */
 }
 #upbutton {
     background: url("/static/img/up5.png") no-repeat top left;
@@ -290,6 +382,7 @@ a.email:hover{
 .group-description{
 	position: absolute;
 	left: 26%;
+	font-weight: 100;
 }
 .checkout-product-nmb{
 	width: 70px;
@@ -308,7 +401,7 @@ a.email:hover{
 
 /*      PLUS-MINUS BUTTON                  */
 .field.fieldCount.form-control.form-group.center{
-	width: 70px;
+	width: 76px;
 }
 button.bot_pm {
 	background-color: white;

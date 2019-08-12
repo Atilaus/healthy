@@ -9,6 +9,8 @@ Fruits - {{ block.super }}
 {% block content %}
 <div class="product-block">
 	<div class="container">
+		<h1 class="text-center">Fruits</h1>
+		
 			{% for picture in products_images_fruits %}
 			{% include 'landing/group_item.html' %}
 			{% endfor %}

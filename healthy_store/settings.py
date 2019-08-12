@@ -27,37 +27,24 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
-)
-SITE_ID = 1
-LOGIN_REDIRECT_URL = '/'
-#LOGIN_URL = '/accounts/login'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-ACCOUNT_EMAIL_REQUIRED = True
-#ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-ACCOUNT_SESSION_REMEMBER = True
-
-
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+SESSION_COOKIE_HTTPONLY = True
 # Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
-	'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-	'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
 	'favicon',
 	'landing',
 	'orders',
 	'products',
+	'accounts',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -81,10 +68,11 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
-				'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
 				'orders.context_processors.getting_cart_info',
+				'orders.context_processors.getting_subscribe_form',
+				'orders.context_processors.bg_image_show',
             ],
         },
     },
@@ -135,6 +123,7 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/

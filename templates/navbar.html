@@ -1,6 +1,14 @@
 {% load static %}
-<nav class="navbar navbar-expand-lg navbar-light bg fixed-top">
-  <a class="navbar-brand" href="/"></a>
+
+
+		
+
+<nav class="navbar navbar-expand-lg navbar-light bg ">
+
+
+
+
+  
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -10,27 +18,27 @@
         <a class="nav-link" href="/"><img id="logo" src="{% static 'img/logo.png' %}"> </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/">Home </a>
+        <a class="nav-link decor" href="/">Home </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'fruits_url' %}">Fruits</a>
+        <a class="nav-link decor" href="{% url 'fruits_url' %}">Fruits</a>
       </li>
 	  <li class="nav-item">
-        <a class="nav-link" href="{% url 'vegetables_url' %}">Vegetables</a>
+        <a class="nav-link decor" href="{% url 'vegetables_url' %}">Vegetables</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'drinks_url' %}">Drinks</a>
+        <a class="nav-link decor" href="{% url 'drinks_url' %}">Drinks</a>
       </li>
 	  <li class="nav-item">
-        <a class="nav-link" href="{% url 'snacks_url' %}">Snacks</a>
+        <a class="nav-link decor" href="{% url 'snacks_url' %}">Snacks</a>
       </li>
 	  <li class="nav-item">
-        <a class="nav-link" href="{% url 'milkproducts_url' %}">Milk Products</a>
+        <a class="nav-link decor" href="{% url 'milkproducts_url' %}">Milk Products</a>
       </li>
 <input id="checkout_lnk_href" type="hidden" value="{% url 'checkout'  %}">
 	</ul>
 	
-	Hey, {{user.username}}
+
 	
 	
 	<div class="nav navbar-nav right">
@@ -51,7 +59,11 @@
 		</a>
         <div class="dropdown-menu put" id="cart-dropdown">
 		<div class="cart-items">
+		{% if products_in_cart %}
 		<a id="checkout_lnk" href="{% url 'checkout'  %}">MAKE THE ORDER</a>
+		{% else %}
+		no items in the cart
+		{% endif %}
 		{% for product_item in products_in_cart %}
 			<a><pre><img class="img-micro" src="{{ product_item.image_url }}"> {{ product_item.product.name|truncatechars:15 }}  x{{ product_item.nmb }}  by ${{ product_item.price_per_item }} = ${{ product_item.total_price }} <a class="delete-item" href="#" data-product_id="{{ product_item.id }}"> X </a></pre>
 			

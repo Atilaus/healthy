@@ -1,6 +1,13 @@
 from .models import ProductInCart
 from landing.models import BackgroundImage
+from landing.forms import *
 
+
+def bg_image_show(request):
+	bg_image = BackgroundImage.objects.filter(is_active=True)
+	
+	return locals()
+	
 
 def getting_cart_info(request):
 	session_key = request.session.session_key
@@ -12,3 +19,8 @@ def getting_cart_info(request):
 	
 	return locals()
 	
+def getting_subscribe_form(request):
+	subscribe_form = SubscriberForm(request.POST or None)
+	if request.method == "POST" and subscribe_form.is_valid():
+		savingForm = subscribe_form.save()
+	return locals()

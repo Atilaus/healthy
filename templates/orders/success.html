@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+Order accepted - {{ block.super }}
+{% endblock %}
+{% block content %}
+
+	<div class="container">
+		<div class="row">
+
+			<div class="col-xl-8 offset-xl-2">
+				<h3 class="text-center mt-7">Your order accepted!</h3>
+				Now we will do our best to ship your order fast as we can.
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

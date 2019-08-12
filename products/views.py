@@ -17,6 +17,5 @@ def product(request, product_id):
 	if not session_key:
 		request.session.cycle_key()
 	
-	bg_image = BackgroundImage.objects.filter(is_active=True)
-	
+
 	return render(request, 'products/product.html', locals())

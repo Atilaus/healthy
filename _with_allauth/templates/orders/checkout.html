@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+Checkout - {{ block.super }}
+{% endblock %}
+{% block content %}
+
+	<div class="container">
+		<div class="row">
+		{% if products_in_cart %}
+			<div class="col-xl-8 offset-xl-2">
+				<h3 class="text-center mt-7">Products in the Cart</h3>
+				
+				{{ request.session.cart.products }}
+				
+			<form class="form-horizontal mb-5" method="post">{% csrf_token %}
+					<div class="form-inline">
+					
+						<div class="form-group">
+							<div class="col-lg-4">
+								
+								<span class="form-error">{{ form.name.errors }}</span>
+								<input type="text" name="{{ form.name.html_name }}" class="form-control" value="{{ request.POST.name }}" placeholder="Name">
+							</div>
+						</div>
+					
+					
+						<div class="form-group">
+							<div class="col-lg-4">
+								
+								<span class="form-error">{{ form.phone.errors }}</span>
+								<input type="text" name="{{ form.phone.html_name }}" class="form-control" value="{{ request.POST.name }}" placeholder="Phone Number">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-lg-4">
+								
+								<span class="form-error">{{ form.email.errors }}</span>
+								<input type="text" name="{{ form.email.html_name }}" class="form-control" value="{{ request.POST.name }}" placeholder="E-mail">
+							</div>
+						</div>
+					</div>
+
+				<table class="table text-center">
+					<thead>
+						<tr>
+							<th>Image</th>
+							<th>Product Name</th>
+							<th>Quantity</th>
+							<th>Price per Item</th>
+							<th>Price</th>
+						</tr>
+					</thead>
+					<tbody>
+					
+						{% for product_in_cart in products_in_cart %}
+						<tr>
+							<td>
+							
+								<img src="{{ product_in_cart.image_url }}" class="img-responsive" >
+								
+							</td>
+							<td>
+								{{ product_in_cart.product.name }}
+							</td>
+						
+							<td>
+								<input value="{{ product_in_cart.nmb }}" type="number" class="checkout-product-nmb center" name="product_in_cart_{{ product_in_cart.id }}">
+
+							</td>
+						
+							<td>
+								$<span class="checkout-product-price">
+								{{ product_in_cart.price_per_item }}
+								</span>
+							</td>
+						
+							<td>
+								$<span class="checkout-total-product-price">
+								{{ product_in_cart.total_price }}
+								</span>
+							</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+				
+				<div class="text-right">
+					<div class="bg">
+					<b>Order Sum: <span class="dollar">$</span></b> <span id="checkout_total_order_amount"> </span>
+					</div>
+				</div>
+				<hr>
+				<div class="text-right">
+					<button type="submit" class="btn btn-primary btn-lg">Confirm Order</button>
+				</div>
+				
+			</form>
+			</div>
+			
+			
+			{% else %}
+			<div class="col-xl-8 offset-xl-2">
+			<h3 class="text-center mt-7">There is no products in the cart</h3>
+			</div>
+			{% endif %}
+		</div>
+	</div>
+<script src="{% static 'js/num.js' %}"></script>
+{% endblock %}
