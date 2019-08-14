@@ -1,25 +1,15 @@
     <footer class="footer">
       <div class="container">
         <div class="row">
-			<div class="col-md-3">
+			<div class="col-md-4">
 				<h4 class="text-center">WHY HEALHY FOOD?</h4>
 				<hr>
 				<p>
 					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
 				</p>
 			</div>
-			<div class="col-md-3">
-				<h4 class="text-center">QUICK LINKS</h4>
-				<hr>
-				<ul><div class="green_links">
-					<p><li><a href="#">About</a></li></p>
-					<p><li><a href="#">Contacts</a></li></p>
-					<p><li><a href="#">Quality Assurance</a></li></p>
-					<p><li><a href="{% url 'checkout' %}">Checkout</a></li></p>
-					</div>
-				<ul>
-			</div>
-			<div class="col-md-3">
+
+			<div class="col-md-4">
 				<h4 class="text-center">NEWSLETTER</h4>
 				<hr>
 				<p>
@@ -27,14 +17,14 @@
 				</p>
 				<form action="" method="post" >{% csrf_token %}
 					<div class="form-group">
-						<input type="email" name="{{subscribe_form.email.name}}" class="form-control" placeholder="E-mail Address">
+						<input type="email" name="{{subscribe_form.email.name}}" class="form-control sbs" placeholder="E-mail Address">
 					<button type="submit" class="btn btn-outline-light">
 						Send
 					</div>
 					</button>
 					</form>
 					</div>
-			<div class="col-md-3">
+			<div class="col-md-4">
 				<h4 class="text-center">GET IN TOUCH</h4>
 				<hr>
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>

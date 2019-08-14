@@ -394,6 +394,18 @@ a.email:hover{
 	font-weight:100;
 }
 
+.form-control.sbs{
+	background-color: #fff0;
+	color: white;
+}
+.form-control.sbs:active,
+.form-control.sbs:hover{
+	background-color: white;
+	color: black;
+}
+
+
+
 
 
 
