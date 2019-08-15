@@ -88,7 +88,7 @@ post_save.connect(product_in_order_post_save, sender=ProductInOrder)
 
 class ProductInCart(models.Model):
 	session_key = models.CharField(max_length=255, blank=True, null=True, default=None)
-	image_url = models.SlugField(blank=True, null=True, default=None)
+	image_url = models.SlugField(max_length=255, blank=True, null=True, default=None)
 	order = models.ForeignKey(Order, on_delete=models.CASCADE, blank=True, null=True, default=None)
 	product = models.ForeignKey(Product, on_delete=models.PROTECT, blank=True, null=True, default=None)
 	nmb = models.IntegerField(default=1)
