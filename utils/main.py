@@ -1,4 +1,4 @@
-from functool import wraps
+from functools import wraps
 
 
 def disable_for_loaddata(signal_handler):
