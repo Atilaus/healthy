@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from .models import *
 from products.models import Product
-from .forms import CheckoutContactForm
+from .forms import *
 from django.contrib.auth.models import User
 from landing.models import BackgroundImage
 from django.contrib.auth import login, authenticate
@@ -51,43 +51,74 @@ def cart_adding(request):
 def checkout(request):
 	session_key = request.session.session_key
 	products_in_cart = ProductInCart.objects.filter(session_key=session_key, is_active=True).exclude(order__isnull=False)
-	form = CheckoutContactForm(request.POST or None)
+	
+	form = CheckoutContactFormAnon(request.POST or None)
+	if request.user.is_authenticated:
+		form = CheckoutContactForm(request.POST or None)
 	user = request.user
+	
 	
 	if request.POST:
 		
 		if form.is_valid():
+			
 			data = request.POST
-			email = data["email"]
-			password = data["password"]
+			if request.user.is_authenticated:
+				email = request.user
+			else:
+				email = data["email"]
+				password = data["password"]
 			
-			user, created = User.objects.get_or_create(username=email, password=password, defaults={"email": email})
+				user, created = User.objects.get_or_create(username=email, password=password, defaults={"email": email})
 			
-		elif user.is_authenticated:
-			data = request.POST
-			email = user
+		# if request.user.is_authenticated and form.is_valid():
 			
-		order=Order.objects.create(user=user, status_id=1)
+			# data = request.POST
+			# email = request.user
 		
-		for name, value in data.items():
-			if name.startswith("product_in_cart_"):
-				product_in_cart_id = name.split("product_in_cart_")[1]
-				
-				product_in_cart = ProductInCart.objects.get(id=product_in_cart_id)
-				print(product_in_cart)
-				#product_in_cart.image_url = image_url
-				print(product_in_cart.image_url)
-				product_in_cart.nmb = value
-				product_in_cart.order = order
-				product_in_cart.save(force_update=True)
+		# if checker:
+			order=Order.objects.create(user=user, status_id=1)
+		
+			for name, value in data.items():
+				if name.startswith("product_in_cart_"):
+					product_in_cart_id = name.split("product_in_cart_")[1]
+					
+					product_in_cart = ProductInCart.objects.get(id=product_in_cart_id)
+					print(product_in_cart)
+					#product_in_cart.image_url = image_url
+					print(product_in_cart.image_url)
+					product_in_cart.nmb = value
+					product_in_cart.order = order
+					product_in_cart.save(force_update=True)
 
-				
-				ProductInOrder.objects.create(product=product_in_cart.product, nmb= product_in_cart.nmb, image_url = product_in_cart.image_url, customer_email=email, customer_name=email,  price_per_item=product_in_cart.price_per_item, total_price=product_in_cart.total_price, order=order)
-			
+					
+					ProductInOrder.objects.create(product=product_in_cart.product, nmb= product_in_cart.nmb, image_url = product_in_cart.image_url, customer_email=email, customer_name=email,  price_per_item=product_in_cart.price_per_item, total_price=product_in_cart.total_price, order=order)
+					return render(request, 'orders/success.html', locals())
 			# login(request, user)
 			# return redirect('checkout')
-			success(request, user)
-	
+			# success(request, user)
+			#return render(request, 'orders/checkout.html', locals())			
+		
+		elif request.user.is_authenticated:
+			data = request.POST
+			email = request.user
+			order=Order.objects.create(user=user, status_id=1)
+		
+			for name, value in data.items():
+				if name.startswith("product_in_cart_"):
+					product_in_cart_id = name.split("product_in_cart_")[1]
+					
+					product_in_cart = ProductInCart.objects.get(id=product_in_cart_id)
+					print(product_in_cart)
+					#product_in_cart.image_url = image_url
+					print(product_in_cart.image_url)
+					product_in_cart.nmb = value
+					product_in_cart.order = order
+					product_in_cart.save(force_update=True)
+
+					
+					ProductInOrder.objects.create(product=product_in_cart.product, nmb= product_in_cart.nmb, image_url = product_in_cart.image_url, customer_email=email, customer_name=email,  price_per_item=product_in_cart.price_per_item, total_price=product_in_cart.total_price, order=order)
+					return render(request, 'orders/success.html', locals())
 	return render(request, 'orders/checkout.html', locals())
 	
 def success(request, user):

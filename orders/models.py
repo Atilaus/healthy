@@ -26,7 +26,7 @@ class Order(models.Model):
 	customer_email = models.EmailField(blank=True, null=True, default=None)
 	customer_name = models.CharField(max_length=64, blank=True, null=True, default=None)
 	customer_phone = models.CharField(max_length=48, blank=True, null=True, default=None)
-	customer_address = models.CharField(max_length=128, blank=True, null=True, default=None)
+	customer_address = models.CharField(max_length=255, blank=True, null=True, default=None)
 	comments = models.TextField(blank=True, null=True, default=None)
 	total_price = models.DecimalField(default=0, max_digits=9, decimal_places=2)
 	status = models.ForeignKey(Status, on_delete=models.PROTECT)
