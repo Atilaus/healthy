@@ -41,11 +41,11 @@
     <body>
 	<div class="wrapper">
 		<div class="wrapper-content">
-			<div class="auth-container">
+			<div class="auth-container mt-2">
 			{% if user.is_authenticated %}
 			{% include 'authrow.html' %}
 			{% else %}
-			<a href="{% url 'register_url' %}">Sign in</a> | <a href="{%url 'login_url' %}">Log in</a>
+			<a href="{% url 'register_url' %}" class="tab">Create an account</a>  <a href="{%url 'login_url' %}">Login</a>
 			{% endif %}
 			</div>
 			<div class="nav-container center">
