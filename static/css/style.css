@@ -8,6 +8,8 @@
 .tab-8{
 	margin-right: 8%;
 }
+.col-xl-4.offset-xl-4 ul.errorlist,
+.col-xl-4.offset-xl-4 ul.errorlist.nonfield,
 .col-4.mt-5 form .errorlist,
 .col-4.mt-5 form .errorlist.nonfield{
 	display:none;

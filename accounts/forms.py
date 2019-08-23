@@ -38,6 +38,26 @@ class UserLoginForm(forms.Form):
 				
 		return super(UserLoginForm, self).clean(*args, **kwargs)
 
+class UserCheckoutForm(forms.ModelForm):
+	username = forms.EmailField(label='Email',
+	widget=forms.EmailInput(attrs={'class': 'form-control'}))
+
+	password = forms.CharField(widget=forms.PasswordInput(attrs={'type': 'password', 'class': 'form-control'}))
+	
+	class Meta:
+		model = User
+		fields = [
+			'username',
+			'password'
+		]
+	
+	def clean_username(self):
+		username = self.cleaned_data.get('username')
+		username_qs = User.objects.filter(username=username)
+		if username_qs.exists():
+			raise forms.ValidationError('You are registered this account before. Please, login into the site')
+		return username
+
 class UserRegisterForm(forms.ModelForm):
 	username = forms.EmailField(label='Email',
 	widget=forms.EmailInput(attrs={'class': 'form-control'}))

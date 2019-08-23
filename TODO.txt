@@ -1,3 +1,0 @@
-
-	*	Если user UNkNOWN, to на checkout "There is no products in the cart"
-		Если user KNOWN, то PRODUCTS IN ORDER, STATUS, ADDRESS, PHONE
