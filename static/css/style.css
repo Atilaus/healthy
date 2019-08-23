@@ -8,8 +8,8 @@
 .tab-8{
 	margin-right: 8%;
 }
-.errorlist,
-.errorlist.nonfield{
+.col-4.mt-5 form .errorlist,
+.col-4.mt-5 form .errorlist.nonfield{
 	display:none;
 }
 h1, h2, h3, h4{

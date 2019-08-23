@@ -11,16 +11,13 @@ Orders - {{ block.super }}
 			{% if user.is_authenticated %}
 				<!-- <div class="col-xl-8 offset-xl-2"> -->
 				<div class="col-xl-12">
-					{% if  user_order_list  %}
-					<h1 class="text-center bg mt-3">Your Orders:</h1>
+					<h1>Your Orders:</h1>
 					<div class="table-container">
-					
 					{% for item in user_order_list %}
 					<table class="table-all-orders text-center">
 					
 						<tr>
 							<th>Index</th>
-							<th>Created</th>
 							<th>Status</th>
 							<th>Total Price</th>
 							<th>Image</th>
@@ -34,9 +31,6 @@ Orders - {{ block.super }}
 						<tr>
 							<td>
 							{{item.id}}
-							</td>
-							<td>
-							{{item.created|date:"SHORT_DATE_FORMAT"}}
 							</td>
 							<td>
 							{{ item.status.name }}
@@ -66,23 +60,18 @@ Orders - {{ block.super }}
 							<td></td>
 							<td></td>
 							<td></td>
-							<td></td>
 							{% endfor %}
 
 						</tr>
 					</tbody>
 					</table>
 					{% endfor %}
-					{% else %}
-					<h1 class="text-center bg mt-3">You have no orders.</h1>
-					{% endif %}
-					
 					</div>
 					
 
 				</div>
 				{% else %}
-				<h1 class="text-center bg mt-3">There is no items.</h1>
+				There is no items.
 				{% endif %}
 
 		

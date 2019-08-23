@@ -4,7 +4,7 @@ from products.models import Product
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import User
-from utils.main import disable_for_loaddata
+#from utils.main import disable_for_loaddata
 
 # Create your models here.
 class Status(models.Model):
@@ -26,7 +26,7 @@ class Order(models.Model):
 	customer_email = models.EmailField(blank=True, null=True, default=None)
 	customer_name = models.CharField(max_length=64, blank=True, null=True, default=None)
 	customer_phone = models.CharField(max_length=48, blank=True, null=True, default=None)
-	customer_address = models.CharField(max_length=255, blank=True, null=True, default=None)
+	customer_address = models.CharField(max_length=128, blank=True, null=True, default=None)
 	comments = models.TextField(blank=True, null=True, default=None)
 	total_price = models.DecimalField(default=0, max_digits=9, decimal_places=2)
 	status = models.ForeignKey(Status, on_delete=models.PROTECT)
@@ -71,7 +71,7 @@ class ProductInOrder(models.Model):
 
 		super(ProductInOrder, self).save(*args, **kwargs)
 
-@disable_for_loaddata
+#@disable_for_loaddata
 def product_in_order_post_save(sender, instance, created, **kwargs):
 	order = instance.order
 	all_products_in_order = ProductInOrder.objects.filter(order=order, is_active=True)
@@ -87,8 +87,8 @@ post_save.connect(product_in_order_post_save, sender=ProductInOrder)
 
 
 class ProductInCart(models.Model):
-	session_key = models.CharField(max_length=255, blank=True, null=True, default=None)
-	image_url = models.SlugField(max_length=255, blank=True, null=True, default=None)
+	session_key = models.CharField(max_length=128, blank=True, null=True, default=None)
+	image_url = models.SlugField(blank=True, null=True, default=None)
 	order = models.ForeignKey(Order, on_delete=models.CASCADE, blank=True, null=True, default=None)
 	product = models.ForeignKey(Product, on_delete=models.PROTECT, blank=True, null=True, default=None)
 	nmb = models.IntegerField(default=1)

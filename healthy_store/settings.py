@@ -101,6 +101,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+		'OPTIONS': {
+            'min_length': 1,
+        }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -139,11 +142,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static", "static_prod")
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "static", "media")
+
+
+
+
+
 #для коммита раскомментить, для ПК - закомментить
-try:
-    from .settings_prod import *
-except:
-    pass
-	
-	
-	
+# try:
+    # from .settings_prod import *
+# except:
+    # pass

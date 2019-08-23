@@ -16,49 +16,13 @@ Checkout - {{ block.super }}
 				{% if user.is_authenticated %}
 
 				{% else %}
-				<div class="form-inline">
-				<div class="form-group">
-				
-				{% if form.errors %}
-					{% for field in form %}
-						{% for error in field.errors %}
-							<div class="alert alert-danger error-tab">
-								<strong>{{ error|escape }}</strong>
-							</div>
-						{% endfor %}
-					{% endfor %}
-					{% for error in form.non_field_errors %}
-						<div class="alert alert-danger error-tab">
-						<strong>{{ error|escape }}</strong>
-						</div>
-					{% endfor %}
-				{% endif %}
-				
-				</div>
-				</div>
-		
 					<div class="form-inline">
 					
 						<div class="form-group">
-							
-							
-							
-							
-							
-							
 							<div class="col-lg-4">
 								
-								
-								
-								
-								
 								<span class="form-error">{{ form.email.errors }}</span>
-								<input type="email" name="{{ form.email.html_name }}" class="form-control" value="{{ request.POST.name }}" 
-								
-								
-								placeholder="E-mail">
-								
-								
+								<input type="email" name="{{ form.email.html_name }}" class="form-control" value="{{ request.POST.name }}" placeholder="E-mail">
 							</div>
 						</div>
 					
@@ -67,12 +31,7 @@ Checkout - {{ block.super }}
 							<div class="col-lg-4">
 								
 								<span class="form-error">{{ form.password.errors }}</span>
-								<input type="password" name="{{ form.password.html_name }}" class="form-control" value="{{ request.POST.name }}" 
-								
-								
-								placeholder="Password">
-								
-								
+								<input type="password" name="{{ form.password.html_name }}" class="form-control" value="{{ request.POST.name }}" placeholder="Password">
 							</div>
 						</div>
 						

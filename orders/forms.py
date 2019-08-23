@@ -1,10 +1,6 @@
 from django import forms
 from .models import *
 
-class CheckoutContactFormAnon(forms.Form):
-	email = forms.EmailField(required=True)
-	password = forms.CharField(required=True)
-	
 class CheckoutContactForm(forms.Form):
 	email = forms.EmailField(required=True)
 	password = forms.CharField()

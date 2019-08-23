@@ -18,8 +18,12 @@ def login_view(request):
 		if next:
 			return redirect(next)
 		return redirect('/')
-		
-	return render(request, 'login.html', {'form':form})
+	
+	context = {
+		'form': form,
+	}
+	
+	return render(request, 'login.html', context)
 	
 def register_view(request):
 	next = request.GET.get('next')
